@@ -16,7 +16,7 @@ def make_hash(lenght=7):
 def django_is_lower_1_2():
     if VERSION[0] == 1 and VERSION[1] < 2:
         return True
-    elif VERSION[0] > 1:
+    elif VERSION[0] >= 1:
         return False
     return True
 
