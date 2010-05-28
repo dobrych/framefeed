@@ -54,7 +54,12 @@ def process_exif(sender, instance, **kwargs):
         focal = None
     Meta = instance.meta.model
     # updating db
-    ma, res = Meta.objects.get_or_create(field='Aperture', value=aperture)
-    ms, res = Meta.objects.get_or_create(field='Shutter', value=exposure)
-    mf, res = Meta.objects.get_or_create(field='Focal length', value=focal)
-    instance.meta.add(ma,ms,mf)
+    if aperture:
+        ma, res = Meta.objects.get_or_create(field='Aperture', value=aperture)
+        instance.meta.add(ma)
+    if exposure:
+        ms, res = Meta.objects.get_or_create(field='Shutter', value=exposure)
+        instance.meta.add(ms)
+    if focal:
+        mf, res = Meta.objects.get_or_create(field='Focal length', value=focal)
+        instance.meta.add(mf)
